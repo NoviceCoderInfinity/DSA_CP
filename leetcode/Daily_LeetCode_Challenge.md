@@ -2,7 +2,7 @@
 
 The repo contains the description and link to solutions to LeetCode Daily Challenge.
 
-## August 2024
+## September 2024
 
 | Number | Title                                                                  | Difficulty | Code                                                | LC Website  | Video Solution |
 | ------ | ---------------------------------------------------------------------- | ---------- | --------------------------------------------------- | ----------- | -------------- |
