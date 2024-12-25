@@ -1,3 +1,17 @@
+// Solution 1
+class Solution {
+public:
+    bool detectCapitalUse(string word) {
+        int caps_count = 0;
+        for (int i = 0; i < word.size(); ++i) {
+            if ('A' <= word[i] && word[i] <= 'Z') {++caps_count;}
+        }
+        if (caps_count == word.size() || caps_count == 0) {return true;} // covers for case 1 and case 2
+        return (caps_count == 1) && ('A' <= word[0] && word[0] <= 'Z'); // covers for case 3
+    }
+};
+
+// Solution 2
 class Solution {
 public:
     bool detectCapitalUse(string word) {
