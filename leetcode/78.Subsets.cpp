@@ -1,4 +1,4 @@
-// Solution 1
+// Cascading Solution
 class Solution {
 public:
     vector<vector<int>> subsets(vector<int>& nums) {
@@ -16,7 +16,7 @@ public:
     }
 };
 
-// Solution 2
+// Binary Sorted Subset Approach 1
 class Solution {
 public:
     void next_iter(string& iter) {
@@ -35,6 +35,28 @@ public:
             for(int j = 0; j < iter.size(); ++j) {
                 if (iter[j] == '1') {temp.push_back(nums[j]);}}
             answer.push_back(temp); next_iter(iter);}
+        return answer;
+    }
+};
+
+// Binary Sorted Subset Solution Approach 2
+class Solution {
+public:
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vector<int>> answer;
+        int n = nums.size();
+
+        for (int mask = 0; mask < pow(2, n); ++mask) {
+            int bitmask = mask;
+            vector<int> currentSubset;
+
+            for (int j = 0; j < n; ++j) {
+                if (bitmask & 1 == 1) {currentSubset.push_back(nums[j]);}
+                bitmask = bitmask >> 1;
+            }
+            answer.push_back(currentSubset);
+        }
+
         return answer;
     }
 };
