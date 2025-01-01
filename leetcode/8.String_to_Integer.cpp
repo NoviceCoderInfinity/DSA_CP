@@ -1,27 +1,30 @@
-#include <bits/stdc++.h>
-using namespace std;
-
-int myAtoi(string s) {
-        int i = 0; bool positive = true; long number = 0; 
-        
-        while(i < s.size() && s[i] == ' ') {++i;}
-        
-        if (s[i] == '-') {positive = false; ++i;}
-        else if (s[i] == '+') {++i;}
-        
-        while(i < s.size() && s[i] >= '0' && s[i] <= '9') {
-            int digit = s[i] - '0';
-            number *= 10; number += (long)(digit); ++i; 
-            if (positive && number > INT_MAX) {return INT_MAX;}
-            else if (!positive && number - 1 > INT_MAX) {return INT_MIN;}
-        }
-        return positive ? number : -number;
+// Recursive Solution
+class Solution {
+    int result = 0;
+    bool positive = true;
+public:
+    bool sanityCheck(int result, int dig) {
+        return (result > (INT_MAX - dig) / 10) || (result < (INT_MIN + dig) / 10);
     }
 
+    void customAtoi(string s) {        
+        if (s.size() == 0 || !(s[0] >= '0' && s[0] <= '9')) {return ;}
+        int digit = s[0] - '0';
+            if (sanityCheck(result, digit)){
+                if (positive) {result = INT_MAX;}
+                else {result = INT_MIN; positive = true;}
+                return;
+            }
+        result *= 10; result += digit;
+        customAtoi(s.substr(1));
+    }
 
-int main() {
-	string s; cout << "Input the number in the string format: ";
-	cin >> s;
-	int result = myAtoi(s);
-	cout << result << endl;
-}
+    int myAtoi(string s) {
+        int i = 0;
+        while(i < s.size() && s[i] == ' ') {++i;}
+        if (s[i] == '-') {positive = false; ++i;}
+        else if (s[i] == '+') {++i;}
+        customAtoi(s.substr(i));
+        return positive ? result : -result;
+    }
+};
