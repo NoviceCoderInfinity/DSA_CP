@@ -14,7 +14,6 @@ public:
     void Reverse(stack<int> &St){
         if (St.size() == 0) {return ;}
         int top = St.top(); St.pop();
-        St.pop();
         
         Reverse(St);
         insert_at_bottom(St, top);
