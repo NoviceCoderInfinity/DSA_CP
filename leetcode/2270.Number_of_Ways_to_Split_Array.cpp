@@ -39,3 +39,24 @@ public:
         return ways_split;
     }
 };
+
+// Solution 3
+class Solution {
+public:
+    int waysToSplitArray(vector<int>& nums) {
+        int ways_split = 0, n = nums.size();
+
+        vector<long long int> prefix_sum(n, 0);
+        prefix_sum[0] = static_cast<long long int>(nums[0]);
+
+        for (int i = 1; i < n; ++i) {
+            prefix_sum[i] = prefix_sum[i-1] + static_cast<long long int>(nums[i]);
+        }
+
+        for (int i = 0; i < n - 1; ++i) {
+            ways_split += (prefix_sum[i] >= prefix_sum.back() - prefix_sum[i]);
+        }
+
+        return ways_split;
+    }
+};
