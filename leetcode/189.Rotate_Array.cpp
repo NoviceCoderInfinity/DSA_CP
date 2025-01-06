@@ -1,3 +1,16 @@
+// Solution 1
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        int n = nums.size();
+        k %= n;
+        vector<int> prefix_arr(nums.begin() + nums.size() - k, nums.begin() + nums.size());
+        for(int i = n - k - 1; i >= 0; --i) {nums[i + k] = nums[i];}
+        for(int i = 0; i < k; ++i) {nums[i] = prefix_arr[i];}
+    }
+};
+
+// Solution 2
 class Solution {
 public:
     void rotate(vector<int>& nums, int k) {
