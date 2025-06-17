@@ -24,3 +24,22 @@ public:
         return dp[n];
     }
 };
+
+// Bottom-Up Memoization
+// Time Complexity: O(n)
+// Space Complexity: O(n)
+class Solution {
+public:
+    map<int, int> dp;
+    Solution() {dp[0] = 0; dp[1] = 1; dp[2] = 2; dp[3] = 3;}
+
+    int climbStairs(int n) {
+        if (dp.find(n) != dp.end()) {
+            return dp[n];
+        }
+        for (int i = 4; i <= n; ++i) {
+            dp[i] = dp[i-1] + dp[i-2];
+        }
+        return dp[n];
+    }
+};
