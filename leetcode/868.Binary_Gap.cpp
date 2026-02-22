@@ -1,3 +1,4 @@
+# Solution 1: Brute Force / Calculation
 class Solution {
 public:
     string get_string_binary_number(int number) {
@@ -25,6 +26,26 @@ public:
                 last_index = index;
             }
             ++index;
+        }
+        return max_dist;
+    }
+};
+
+# Solution 2: One Pass
+class Solution {
+public:
+    int binaryGap(int n) {
+        int search_index = floor(log2(n)) + 1;
+        int N = n;
+        int last = -1, max_dist = 0;
+        for (int i = 0; i < search_index; ++i) {
+            if ((N & 1) > 0) {
+                if (last != -1) {
+                    max_dist = max(max_dist, i - last);
+                }
+                last = i;
+            }
+            N = N / 2;
         }
         return max_dist;
     }
